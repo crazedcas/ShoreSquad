@@ -125,6 +125,18 @@ class ShoreSquadApp {
             `;
         }, 1000);
     }
+
+    openDirections() {
+        const lat = 1.381497;
+        const lng = 103.955574;
+        const destination = `${lat},${lng}`;
+        
+        // Try to open in Google Maps app first, fallback to web
+        const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}&destination_place_id=ChIJ___________`;
+        const fallbackUrl = `https://maps.google.com/maps?q=${lat},${lng}`;
+        
+        window.open(googleMapsUrl, '_blank');
+    }
 }
 
 // Initialize app when DOM is loaded
@@ -167,3 +179,14 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Add the function globally so it can be called from HTML
+window.openDirections = function() {
+    const lat = 1.381497;
+    const lng = 103.955574;
+    const destination = `${lat},${lng}`;
+    
+    // Open Google Maps with directions
+    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+    window.open(googleMapsUrl, '_blank');
+};
